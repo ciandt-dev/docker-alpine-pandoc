@@ -7,3 +7,11 @@ FROM ivanpondal/alpine-latex:1.1.0
   && update-ca-certificates \
   && apk del wget \
   && rm /tmp/pandoc.tar.gz
+
+ARG PUID=1005
+ARG PGID=1005
+
+RUN addgroup -g ${PGID} pandoc \
+ && adduser -D -u ${PUID} -G pandoc pandoc
+
+USER pandoc
